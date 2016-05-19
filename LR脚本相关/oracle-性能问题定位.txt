@@ -1,0 +1,3 @@
+select sql_text,spid,v$session.program,process from v$sqlarea,v$session,v$process where v$sqlarea.address=v$session.sql_address and v$sqlarea.hash_value=v$session.sql_hash_value and v$session.paddr=v$process.addr and v$process.spid in(PID);
+
+首先使用topas查到消耗CPU比较高的进程，然后获取进程的ID，讲进程id扔在上述sql语句的PID进程处，执行该sql语句，最后抓到了一个sql语句，对sql语句进行了分析，分析了sql语句的执行计划

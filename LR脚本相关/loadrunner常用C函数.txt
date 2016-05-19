@@ -1,0 +1,298 @@
+﻿1）strcat
+    
+    char *strcat （ char *to, const char *from ）；
+    
+    功能：链接两个字符串。
+    
+    例子：
+    
+    这个例子是用strcat链接字符串：Cheers_Lee和 @hotmail.com
+    
+    脚本如下：
+    
+    char test[1024], *a = “@hotmail.com”;
+    
+    strcpy（test, “Cheers_Lee”）；
+    
+    strcat（test, a）；
+    
+    lr_output_message（“We can see %s”,test）；
+    
+    运行后在executon log中看到如下语句：
+    
+    Starting action Action.
+    
+    Action.c（16）： We can see Cheers_Lee@hotmail.com
+    
+    2）strchr
+    
+    char *strchr （ const char *string, int c ）；
+    
+    功能：返回字符串中指定字符后面的字符串。
+    
+    例子：
+    
+    这个例子是返回第一个出现e字符以后所有的字符，和最后一次出现e字符以后所有的字符。
+    
+    脚本如下：
+    
+    char *string = “Cheers is a tester”;
+    
+    char *first_e, *last_e;
+    
+    first_e = （char *）strchr（string, 'e‘）；
+    
+    lr_output_message（“We can see the first occurrence of e: %s”,first_e）；
+    
+    last_e = （char *）strrchr（string, 'e’）；
+    
+    lr_output_message（“We can see the last occurrence of e: %s”, last_e）；
+    
+    运行后在executon log中看到如下语句：
+    
+    Starting action Action.
+    
+    Action.c（12）： We can see the first occurrence of e: eers is a tester
+    
+    Action.c（14）： We can see the last occurrence of e: er
+    
+    3）Strcmp&stricmp
+    
+    int strcmp （ const char *string1, const char *string2 ）；大小写敏感。
+    
+    int stricmp （ const char *string1, const char *string2 ）；大小写不敏感。
+    
+    功能：比较字符串。
+    
+    例子：
+    
+    按是否区分大小写对比两个字符串，并打印出它们的大小关系。
+    
+    脚本如下：
+    
+    int result;
+    
+    char tmp[20];
+    
+    char string1[] = “We can see the string:Cheers”;
+    
+    char string2[] = “We can see the string:cheers”;
+    
+    result = strcmp（ string1, string2 ）；
+    
+    if（ result > 0 ）
+    
+    strcpy（ tmp, “大于” ）；
+    
+    else if（ result < 0 ）
+    
+    strcpy（ tmp, “小于” ）；
+    
+    else
+    
+    strcpy（ tmp, “等于” ）；
+    
+    lr_output_message（ “strcmp: String 1  %s string 2”, tmp ）；
+    
+    result = stricmp（ string1, string2 ）；
+    
+    if（ result > 0 ）
+    
+    strcpy（ tmp, “大于” ）；
+    
+    else if（ result < 0 ）
+    
+    strcpy（ tmp, “小于” ）；
+    
+    else
+    
+    strcpy（ tmp, “等于” ）；
+    
+    lr_output_message（ “stricmp: String 1 %s string 2”, tmp ）；
+    
+    运行后在executon log中看到如下语句：
+    
+    Starting action Action.
+    
+    Action.c（22）： strcmp: String 1  小于 string 2
+    
+    Action.c（33）： stricmp: String 1 等于 string 2
+    
+    4）strcpy
+    
+    char *strcpy （ char *dest, const char *source ）；
+    
+    功能：复制一个字符串到另一个字符串中。
+    
+    例子：
+    
+    复制一个字符串到字符数组中，并打印出来。
+    
+    脚本如下：
+    
+    char test[1024];
+    
+    strcpy（test, “what can we see?”）；
+    
+    lr_output_message（“%s”, test）；
+    
+    运行后在executon log中看到如下语句：
+    
+    Starting action Action.
+    
+    Action.c（10）： what can we see?
+    
+    5）Strdup& strlwr
+    
+    char *strdup （ const char *string ）；
+    
+    复制一个字符串。
+    
+    char *strlwr （ char *string ）；
+    
+    转换成小写字母。
+    
+    例子：
+ 脚本如下：
+    
+    int id;
+    
+    char *groupname_static, *groupname;
+    
+    lr_whoami（&id, &groupname_static, NULL）；
+    
+    lr_output_message（“groupname=%s”, groupname_static）；
+    
+    groupname = （char *）strdup（groupname_static）；
+    
+    groupname = （char *）strlwr（groupname）；
+    
+    lr_output_message（“lower case groupname=%s”, groupname）；
+    
+    free（groupname）；
+    
+    上述脚本用vugen保存为：CHANGE
+    
+    在controller中运行（设置为总是发送消息）
+    
+    运行后在log中看到如下语句：
+    
+    Starting action Action.  [MsgId: MMSG-15919]
+    
+    Action.c（11）： groupname=CHANGE       [MsgId: MMSG-17999]
+    
+    Action.c（16）： lower case groupname=change  [MsgId: MMSG-17999]
+    
+    6）Strlen
+    
+    size_t strlen （ const char *string ）；
+    
+    功能：返回字符串长度（bytes）。
+    
+    例子：
+    
+    这个例子很简单，就是得到一个字符串中的字符的个数。然后打印出来。
+    
+    脚本如下：
+    
+    Starting action Action.  [MsgId: MMSG-15919]
+    
+    Action.c（11）： groupname=CHANGE       [MsgId: MMSG-17999]
+    
+    Action.c（16）： lower case groupname=change  [MsgId: MMSG-17999]
+    
+    运行后在log中看到如下语句：
+    
+    Action.c（13）： The  sentence has 18 letters
+    
+    7）Strncat
+    
+    char *strncat （ char *to_string, const char *from_string, size_t n ）；
+    
+    把一个字符串连接到另一个字符串后面。
+    
+    例子：
+    
+    在这里，我随便写了两个字符串，用此函数把他们连接起来，并打印出来。
+    
+    脚本如下：
+    
+    char str1[]=“Cheers is ”;
+    
+    char str2[]=“a tester.”;
+    
+    lr_output_message（“What can we see?”）；
+    
+    lr_output_message（“The str1 is %s.”,str1）；
+    
+    strncat（str1,str2,20）；
+    
+    lr_output_message（“The str1 is %s.”,str1）；
+    
+    运行后在log中看到如下语句：
+    
+    Action.c（9）： What can we see?
+    
+    Action.c（10）： The str1 is Cheers is .
+    
+    Action.c（13）： The str1 is Cheers is a tester
+    
+    注：我们可以看到，没有连接前的str1是：Cheers is,连接后的字符串是：Zee is a tester.也可以看看strcat函数。
+    
+    8）strncmp
+    
+    int strncmp （ const char *string1, const char *string2, size_t n ）；
+    
+    对比两个字符串的前n位。
+    
+    例子：
+    
+    对比两个字符串，并把对比结果打印出来。这里我和上面的strcmp一起写。
+    
+    脚本如下：
+    
+    char result;
+    
+    char str1[]=“Cheers is a tester.”;
+    
+    char str2[]=“Cheers is a tester.”;
+    
+    char str3[]=“Cheers is a tester?”;
+    
+    result = strcmp（str1,str2）；
+    
+    if（result > 0）
+    
+    lr_output_message（“str1 is greater than str2.”）；
+    
+    else if（result < 0）
+    
+    lr_output_message（“str1 is less than str2.”）；
+    
+    else
+    
+    lr_output_message（“str1 is equal to str2.”）；
+    
+    result = strncmp（ str1, str3 , 30）；
+    
+    if（result > 0）
+    
+    lr_output_message（“str1 is greater than str3.”）；
+    
+    else if（result < 0）
+    
+    lr_output_message（“str1 is less than str3.”）；
+    
+    else
+    
+    lr_output_message（“str1 is equal to str3.”）；
+    
+    运行后在log中看到如下语句：
+    
+    Starting iteration 1.
+    
+    Starting action Action.
+    
+    Action.c（18）： str1 is equal to str2.
+    
+    Action.c（28）： str1 is less than str3.

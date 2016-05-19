@@ -1,0 +1,125 @@
+1.    Intweb_reg_save_param("参数名","LB=左边界","RB=右边界",LAST);/注册函数，在参数值出现的前面使用，注册成功时返回值为0，注册失败时返回值为1。左右边界需根据TreeView里相关步骤的SeverResponse代码来确定。用以上函数能获取第一个符合条件的数值。
+2.        web_reg_save_param("参数名”,"LB=左边界”,"RB=右边界","Ord=All",LAST);/当参数有多个值时，加上"Ord=All”后可获取所有的数值。注册成功后，{参数名_count}表示取得的数值个数，{参数名_1}为第一个数值，{参数名_2}为第二个数值。
+3.        lr_save_string(“字符串变量”,"参数名")/将字符变量里的值传递给指定参数。通过该函数来改变DataFile类型参数的数值。
+4.        lr_eval_string("{参数名}")/取得参数的数值。可取得已注册参数或DataFile类型参数的数值。eval就是evaluation（估价,评价,赋值）的缩写。
+5.        int sprintf(char * string , const char*format_string[,args]);/字符串赋值函数
+Action()
+{
+int index=56;
+charfilename[64],*suffix="txt";
+sprintf(filename,"log_%d.%s",index,suffix);
+lr_output_message("Thenewfilenameis%s",filename);
+return 0;
+}
+Output：Thenewfilenameislog_56.txt
+6.        char*strcat(char*to,constchar*from);/将一字符串追加到另一字符串后面
+7.        web_find("find_time","What=2006-03-0118:21:16.882",LAST);/增加检查点,检查“2006-03-0118:21:16.882”这个字符串是否出现在当前页面上。find_time为自己任意输入的检查点名称。
+8.      事务函数
+lr_end_sub_transaction/标记子事务的结束以便进行性能分析
+lr_end_transaction/标记LoadRunner事务的结束
+lr_end_transaction_instance/标记事务实例的结束以便进行性能分析
+lr_fail_trans_with_error/将打开事务的状态设置为LR_FAIL并发送错误消息
+lr_get_trans_instance_duration/获取事务实例的持续时间（由它的句柄指定）
+lr_get_trans_instance_wasted_time/获取事务实例浪费的时间（由它的句柄指定）
+lr_get_transaction_duration/获取事务的持续时间（按事务的名称）
+lr_get_transaction_think_time/获取事务的思考时间（按事务的名称）
+lr_get_transaction_wasted_time/获取事务浪费的时间（按事务的名称）
+lr_resume_transaction/继续收集事务数据以便进行性能分析
+lr_resume_transaction_instance/继续收集事务实例数据以便进行性能分析
+lr_set_transaction_instance_status/设置事务实例的状态
+lr_set_transaction_status/设置打开事务的状态
+lr_set_transaction_status_by_name/设置事务的状态
+lr_start_sub_transaction/标记子事务的开始
+lr_start_transaction/标记事务的开始
+lr_start_transaction_instance/启动嵌套事务（由它的父事务的句柄指定）
+lr_stop_transaction/停止事务数据的收集
+lr_stop_transaction_instance/停止事务（由它的句柄指定）数据的收集
+lr_wasted_time/消除所有打开事务浪费的时间
+lr_end_sub_transaction/标记子事务的结束以便进行性能分析
+r_end_transaction/标记LoadRunner事务的结束
+lr_end_transaction_instance/标记事务实例的结束以便进行性能分析
+lr_fail_trans_with_error/将打开事务的状态设置为LR_FAIL并
+ 
+9.     命令行分析函数
+lr_get_attrib_double/检索脚本命令行中使用的double类型变量
+lr_get_attrib_long/检索脚本命令行中使用的long类型变量
+lr_get_attrib_string/检索脚本命令行中使用的字符串
+10. 信息性函数
+lr_user_data_point/记录用户定义的数据示例
+lr_whoami/将有关Vuser脚本的信息返回给Vuser脚本
+lr_get_host_name/返回执行Vuser脚本的主机名
+lr_get_master_host_name/返回运行LoadRunnerController的计算机名
+11. 字符串函数
+lr_eval_string/用参数的当前值替换参数
+lr_save_string/将以NULL结尾的字符串保存到参数中
+lr_save_var/将变长字符串保存到参数中
+lr_save_datetime/将当前日期和时间保存到参数中
+lr_advance_param/前进到下一个可用参数
+lr_decrypt/解密已编码的字符串
+lr_eval_string_ext/检索指向包含参数数据的缓冲区的指针
+lr_eval_string_ext_free/释放由lr_eval_string_ext分配的指针
+lr_save_searched_string/在缓冲区中搜索字符串实例，并相对于该字符串实例，该缓冲区的一部分保存到参数中
+12. 消息函数
+lr_debug_message/将调试消息发送到输出窗口
+lr_error_message/将错误消息发送到输出窗口
+lr_get_debug_message/检索当前的消息类
+lr_log_message/将输出消息直接发送到output.txt文件，此文件位于Vuser脚本目录中。该函数有助于防止输出消息干扰TCP/IP通信。
+lr_output_message/将消息发送到输出窗口
+lr_set_debug_message/为输出消息设置消息类
+lr_vuser_status_message/生成格式化输出并将其打印到ControllerVuser状态区域。
+lr_message/将消息发送到Vuser日志和输出窗口
+13. 操作函数
+web_custom_request允许您使用HTTP支持的任何方法来创建自定义HTTP请求
+web_image在定义的图像上模拟鼠标单击
+web_link在定义的文本链接上模拟鼠标单击
+web_submit_data执行“无条件”或“无上下文”的表单
+web_submit_form模拟表单的提交
+web_url加载由“URL”属性指定的URL
+14. 身份验证函数
+身份验证函数web_set_certificate使Vuser使用在InternetExplorer注册表中列出的特定证书
+身份验证函数web_set_certificate_ex指定证书和密钥文件的位置和格式信息
+身份验证函数web_set_user指定Web服务器的登录字符串和密码，用于Web服务器上已验证用户身份的区域
+15. 缓存函数
+缓存函数web_cache_cleanup清除缓存模拟程序的内容
+16. 检查函数
+检查函数web_find在HTML页内搜索指定的文本字符串
+检查函数web_global_verification在所有后面的HTTP请求中搜索文本字符串
+检查函数web_image_check验证指定的图像是否存在于HTML页内
+检查函数web_reg_find在后面的HTTP请求中注册对HTML源或原始缓冲区中文本字符串的搜索
+17. 连接定义函数
+连接定义函数web_disable_keep_alive禁用Keep-AliveHTTP连接
+连接定义函数web_enable_keep_alive启用Keep-AliveHTTP连接
+连接定义函数web_set_connections_limit设置Vuser在运行脚本时可以同时打开连接的最大数目
+18. 并发组
+web_concurrent_end标记并发组的结束
+web_concurrent_start标记并发组的开始
+19. cook函数
+web_add_cookie添加新的Cookie或修改现有的Cookie
+web_cleanup_cookies删除当前由Vuser存储的所有Cookie
+web_remove_cookie删除指定的Cookie
+20. 关联函数
+web_create_html_param将HTML页上的动态信息保存到参数中。（LR6.5及更低版本）
+web_create_html_param_ex基于包含在HTML页内的动态信息创建参数（使用嵌入边界）（LR6.5及更低版本）。
+关联函数web_reg_save_param
+
+21 loadrunner生成唯一值
+void Main()
+{
+    int i;
+    char uStr[64];
+    srand( (unsigned)time( NULL ) );// 最好放在vuser_init里
+    for (i=0;i<10;i++) {
+        GetUniqueString(i,uStr);
+        lr_output_message(uStr);
+    }
+}
+void GetUniqueString(int inValue,char *outStr)
+{
+    int id, scid;
+    char *vuser_group;    
+    
+    lr_whoami(&id, &vuser_group, &scid);
+    web_save_timestamp_param("tStamp", LAST);
+    sprintf(outStr,"%s%05d%010d%04d",lr_eval_string("{tStamp}"),id,rand(),inValue);
+    free(vuser_group);
+}
